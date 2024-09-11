@@ -3,7 +3,8 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-int count = 0;
+int count = 8;
+int vcount = 0;
 
 typedef  struct 
 {
@@ -15,7 +16,15 @@ typedef  struct
     float   generale;
 }etudiants ;
 
-
+typedef  struct 
+{
+    int     Numerounique ;
+    char    Nom [100];
+    char    Prenom [100];
+    char    DateNaissance[100];
+    char    Departement[100];
+    float   generale;
+}Vetudiants ;
 
 void    Float_swap(float *p1, float *p2)
 {
@@ -24,13 +33,23 @@ void    Float_swap(float *p1, float *p2)
     *p1 = *p2;
     *p2 = a;
 }
+
+void    Int_swap(int *p1, int *p2)
+{
+    int a;
+    a = *p1;
+    *p1 = *p2;
+    *p2 = a;
+}
+
 void    char_swap(char *p1 ,char *p2)
 {
     char a[100];
-    *a = *p1;
-    *p1 = *p2;
-    *p2 = *a;
+    strcpy(a,p1);
+    strcpy(p1,p2);
+    strcpy(p2,a);
 }
+
 void    ajouter(etudiants etudiant[100]);
 void    SupprimerUpdate(etudiants etudiant[100]);
 void    afficher(etudiants etudiant[100]);
@@ -44,34 +63,108 @@ void    NombreChaquemoyenne(etudiants etudiant[100]);
 void    Meilleures3Notes(etudiants etudiant[100]);
 void    ChaquedePartement10(etudiants etudiant[100]);
 void    Rechercher(etudiants etudiant[100]);
+void    Trier(etudiants etudiant[100], Vetudiants Vetudiant[100]);
 void    TriAlphabetique(etudiants etudiant[100]);
+void    Trimoyenne(etudiants etudiant[100]);
+void    TriReussite (etudiants etudiant[100],Vetudiants Vetudiant[100]);
 
+void    data(  etudiants etudiant[100])
+{
 
+            strcpy(etudiant[0].Nom , "mohamed");
+            strcpy(etudiant[0].Prenom , "hanafi");
+            strcpy(etudiant[0].DateNaissance ,"2001/03/19");
+            strcpy(etudiant[0].Departement  , "A" );
+            etudiant[0].generale  = 16.5 ;
+            etudiant[0].Numerounique = 1;
+            //----------------------------------------------
+            strcpy(etudiant[1].Nom , "abdelhafid");
+            strcpy(etudiant[1].Prenom , "mohamed");
+            strcpy(etudiant[1].DateNaissance ,"2001/01/10");
+            strcpy(etudiant[1].Departement  , "B" );
+            etudiant[1].generale  = 16.5 ;
+            etudiant[1].Numerounique = 2;
+            //----------------------------------------------
+            strcpy(etudiant[2].Nom , "abdelhafid");
+
+            strcpy(etudiant[2].Prenom , "mohamed");
+            strcpy(etudiant[2].DateNaissance ,"2002/02/20");
+            strcpy(etudiant[2].Departement  , "C" );
+            etudiant[2].generale  = 16.5 ;
+            etudiant[2].Numerounique = 3;
+            //----------------------------------------------
+            strcpy(etudiant[3].Nom , "hamza");
+
+            strcpy(etudiant[3].Prenom , "mohamed");
+            strcpy(etudiant[3].DateNaissance ,"2003/03/30");
+            strcpy(etudiant[3].Departement  , "D" );
+            etudiant[3].generale  = 16.5 ;
+            etudiant[3].Numerounique = 4;
+            //----------------------------------------------
+            strcpy(etudiant[4].Nom , "anass");
+            strcpy(etudiant[4].Prenom , "mohamed");
+            strcpy(etudiant[4].DateNaissance ,"2007/07/18");
+            strcpy(etudiant[4].Departement  , "A" );
+            etudiant[4].generale  = 19 ;
+            etudiant[4].Numerounique = 5;
+            //----------------------------------------------
+            strcpy(etudiant[5].Nom , "mariem");
+            strcpy(etudiant[5].Prenom , "mohamed");
+            strcpy(etudiant[5].DateNaissance ,"2006/06/05");
+            strcpy(etudiant[5].Departement  , "B" );
+            etudiant[5].generale  = 17.5 ;
+            etudiant[5].Numerounique = 6;
+            //----------------------------------------------
+            strcpy(etudiant[6].Nom , "aya");
+
+            strcpy(etudiant[6].Prenom , "mohamed");
+            strcpy(etudiant[6].DateNaissance ,"2004/04/15");
+            strcpy(etudiant[6].Departement  , "C" );
+            etudiant[6].generale  = 6.5 ;
+            etudiant[6].Numerounique = 7;
+            //----------------------------------------------
+            strcpy(etudiant[7].Nom , "aamir");
+            strcpy(etudiant[7].Prenom , "mohamed");
+            strcpy(etudiant[7].DateNaissance ,"2005/05/25");
+            strcpy(etudiant[7].Departement  , "D" );
+            etudiant[7].generale  = 19.5 ;
+            etudiant[7].Numerounique = 8;
+}
+
+int numirInt()
+{
+    int i = 0;
+    int s = 0;
+    char choi[10];
+    scanf("%s",choi);
+    while (choi[i])
+    {
+        if ( choi[i] >= '0' && choi[i] <= '9')
+        {
+            s = (s * 10) + (choi[i] - 48 );
+        }
+        else
+        {
+            return 10;
+        }
+        i++; 
+    }
+    return s;
+}
 
 int main()
 {
 etudiants etudiant[100];
-
-    int choi;
+Vetudiants Vetudiant[100];
+    data(etudiant);
+    int choi ;
     int i = 0;
 
     
     while(1)
     {
         aficeh();
-    while (i < 3)
-    {
-        scanf ("%d",&choi);
-       if ( choi >= 0 && choi <= 7)
-       {
-            break;
-       }
-       else if (i == 2)
-       {
-        break;
-       }
-       i++;
-    }
+        choi = numirInt();
   
     switch (choi)
     {
@@ -89,7 +182,20 @@ etudiants etudiant[100];
     case 4:
         Statistique(etudiant);
         break;
+    case 5:
+        Calculer(etudiant);
+        break;
+    case 6:
+        Rechercher(etudiant);
+        break;
+    case 7:
+        Trier(etudiant , Vetudiant);
+        break;
+    case 0:
+        printf("sortire");
+        exit(0);  
     default:
+        printf("Default!");
         break;
     }
     }
@@ -151,8 +257,8 @@ void    afficher(etudiants etudiant[100])
 void    SupprimerUpdate(etudiants etudiant[100])
 {
     int chio;
-    printf("");
-    scanf("%d",&chio);
+    printf("1 => modifer\n2 => Supprimer");
+    chio = numirInt();
     if (chio == 1)
     {
        update(etudiant);
@@ -172,7 +278,7 @@ void    update(etudiants etudiant[100])
     int n = 0;
     int id;
     printf("Enter the id: ");
-    scanf("%d", &id);
+    id = numirInt();
     for (int i = 0; i < count; i++)
     {
         if (etudiant[i].Numerounique == id)
@@ -209,7 +315,7 @@ void    Supprimer (etudiants etudiant[100])
     int i, j;
     int id;
     printf("Enter the id : ");
-    scanf("%d", &id);
+    id = numirInt();
 
     for (i = 0; i < count; i++) 
     {
@@ -230,7 +336,7 @@ void    Supprimer (etudiants etudiant[100])
             strcpy(etudiant[i].DateNaissance ,  etudiant[i+1].DateNaissance);
             strcpy(etudiant[i].Departement , etudiant[i+1].Departement);
             Float_swap(&etudiant[i].generale , &etudiant[i+1].generale);
-            etudiant[i].Numerounique = j + 1;
+            etudiant[i].Numerounique = i + 1;
         }
         count-=1;  
 }
@@ -271,10 +377,28 @@ void    Calculer(etudiants etudiant[100])
 
 void    Statistique(etudiants etudiant[100])
 {
-
-
-    //printf ("totale etudiant %d \n", etudiant[count].Numerounique);
-    NombreChaqueDepartement(etudiant);
+    int choi;
+    choi = numirInt();
+    if (choi == 1)
+    {
+    printf ("totale etudiant %d \n", count);
+        
+    }
+    else if (choi == 2)
+    {
+            NombreChaqueDepartement(etudiant);
+    }else if (choi == 3)
+    {
+        NombreChaquemoyenne(etudiant);
+    }
+    else if (choi == 4)
+    {
+        Meilleures3Notes(etudiant);
+    }
+    else if (choi == 6)
+    {
+        ChaquedePartement10(etudiant);
+    }   
 }
 
 void    NombreChaqueDepartement(etudiants etudiant[100])
@@ -365,7 +489,7 @@ void    ChaquedePartement10(etudiants etudiant[100])
 
     for (int i = 0; i < count; i++)
     {
-        if (etudiant[i].Departement[0] == 'B' && etudiant[i].generale > 10.00)
+        if (etudiant[i].Departement[0] == 'B' && etudiant[i].generale >= 10.00)
         {
             printf ("%d \n",etudiant[i].generale);
             
@@ -464,6 +588,26 @@ void Rechercher (etudiants etudiant[100])
     }
   
 }
+void    Trier(etudiants etudiant[100], Vetudiants Vetudiant[100])
+{
+    int choi;
+    choi = numirInt();
+
+    if (choi == 1)
+    {
+       TriAlphabetique(etudiant);
+    }
+    else if (choi == 2)
+    {
+        Trimoyenne(etudiant);
+    }
+    else if (choi == 3)
+    {
+        TriReussite(etudiant,Vetudiant);
+    }
+
+}
+
 
 void TriAlphabetique(etudiants etudiant[100])
 {
@@ -471,14 +615,59 @@ void TriAlphabetique(etudiants etudiant[100])
     {
         for (int j = 0; j < count-1-i; j++)
         {
-        if (strcmp(etudiant[i].Nom ,etudiant[j + 1].Nom) > 0)
+        if (strcmp(etudiant[j].Nom ,etudiant[j + 1].Nom) > 0)
         {
-            char_swap(etudiant[i].Nom , etudiant[i+1].Nom );
-            char_swap(etudiant[i].Prenom , etudiant[i+1].Prenom);
-            char_swap(etudiant[i].DateNaissance ,  etudiant[i+1].DateNaissance);
-            char_swap(etudiant[i].Departement , etudiant[i+1].Departement);
-            Float_swap(&etudiant[i].generale , &etudiant[i+1].generale);
-
+            Int_swap(&etudiant[j].Numerounique , &etudiant[j + 1].Numerounique);
+            char_swap(etudiant[j].Nom , etudiant[j + 1].Nom );
+            char_swap(etudiant[j].Prenom , etudiant[j + 1].Prenom);
+            char_swap(etudiant[j].DateNaissance ,  etudiant[j + 1].DateNaissance);
+            char_swap(etudiant[j].Departement , etudiant[j + 1].Departement);
+            Float_swap(&etudiant[j].generale , &etudiant[j + 1].generale);
         }
+        }
+    }
 }
+
+void Trimoyenne(etudiants etudiant[100])
+{
+    for (int i = 0; i < count-1; i++)
+    {
+        for (int j = 0; j < count-1-i; j++)
+        {
+        if (etudiant[j].generale < etudiant[j + 1].generale)
+        {
+            Int_swap(&etudiant[j].Numerounique ,&etudiant[j+1].Numerounique);
+            char_swap(etudiant[j].Nom , etudiant[j+1].Nom );
+            char_swap(etudiant[j].Prenom , etudiant[j+1].Prenom);
+            char_swap(etudiant[j].DateNaissance ,  etudiant[j+1].DateNaissance);
+            char_swap(etudiant[j].Departement , etudiant[j+1].Departement);
+            Float_swap(&etudiant[j].generale , &etudiant[j+1].generale);
+        }
+        }
+    }
+}
+
+void    TriReussite (etudiants etudiant[100] ,Vetudiants Vetudiant[100])
+{
+    for (int i = 0; i < count; i++)
+    {
+        if ( etudiant[i].generale > 9)
+        {
+            strcpy(Vetudiant[vcount].Nom , etudiant[i].Nom );
+            strcpy(Vetudiant[vcount].Prenom , etudiant[i].Prenom);
+            strcpy(Vetudiant[vcount].DateNaissance ,  etudiant[i].DateNaissance);
+            strcpy(Vetudiant[vcount].Departement , etudiant[i].Departement);
+            Float_swap(&Vetudiant[vcount].generale , &etudiant[i].generale);
+            Int_swap(&Vetudiant[vcount].Numerounique , &etudiant[i].Numerounique);
+            vcount++;
+        }
+        
+    }
+    for (int i = 0; i < vcount; i++)
+    {
+        printf ("%.2f \n",Vetudiant[i].generale); 
+        
+    }
+    
+    
 }
