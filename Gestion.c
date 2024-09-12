@@ -74,14 +74,14 @@ void    data(  etudiants etudiant[100])
             strcpy(etudiant[0].Nom , "mohamed");
             strcpy(etudiant[0].Prenom , "hanafi");
             strcpy(etudiant[0].DateNaissance ,"2001/03/19");
-            strcpy(etudiant[0].Departement  , "A" );
+            strcpy(etudiant[0].Departement  , "maths" );
             etudiant[0].generale  = 16.5 ;
             etudiant[0].Numerounique = 1;
             //----------------------------------------------
             strcpy(etudiant[1].Nom , "abdelhafid");
             strcpy(etudiant[1].Prenom , "mohamed");
             strcpy(etudiant[1].DateNaissance ,"2001/01/10");
-            strcpy(etudiant[1].Departement  , "B" );
+            strcpy(etudiant[1].Departement  , "physique" );
             etudiant[1].generale  = 16.5 ;
             etudiant[1].Numerounique = 2;
             //----------------------------------------------
@@ -89,7 +89,7 @@ void    data(  etudiants etudiant[100])
 
             strcpy(etudiant[2].Prenom , "mohamed");
             strcpy(etudiant[2].DateNaissance ,"2002/02/20");
-            strcpy(etudiant[2].Departement  , "C" );
+            strcpy(etudiant[2].Departement  , "chimique" );
             etudiant[2].generale  = 16.5 ;
             etudiant[2].Numerounique = 3;
             //----------------------------------------------
@@ -97,21 +97,21 @@ void    data(  etudiants etudiant[100])
 
             strcpy(etudiant[3].Prenom , "mohamed");
             strcpy(etudiant[3].DateNaissance ,"2003/03/30");
-            strcpy(etudiant[3].Departement  , "D" );
+            strcpy(etudiant[3].Departement  , "GEOGRAPHIE" );
             etudiant[3].generale  = 16.5 ;
             etudiant[3].Numerounique = 4;
             //----------------------------------------------
             strcpy(etudiant[4].Nom , "anass");
             strcpy(etudiant[4].Prenom , "mohamed");
             strcpy(etudiant[4].DateNaissance ,"2007/07/18");
-            strcpy(etudiant[4].Departement  , "A" );
+            strcpy(etudiant[4].Departement  , "maths" );
             etudiant[4].generale  = 19 ;
             etudiant[4].Numerounique = 5;
             //----------------------------------------------
             strcpy(etudiant[5].Nom , "mariem");
             strcpy(etudiant[5].Prenom , "mohamed");
             strcpy(etudiant[5].DateNaissance ,"2006/06/05");
-            strcpy(etudiant[5].Departement  , "B" );
+            strcpy(etudiant[5].Departement  , "physique" );
             etudiant[5].generale  = 17.5 ;
             etudiant[5].Numerounique = 6;
             //----------------------------------------------
@@ -119,14 +119,14 @@ void    data(  etudiants etudiant[100])
 
             strcpy(etudiant[6].Prenom , "mohamed");
             strcpy(etudiant[6].DateNaissance ,"2004/04/15");
-            strcpy(etudiant[6].Departement  , "C" );
+            strcpy(etudiant[6].Departement  , "chimique" );
             etudiant[6].generale  = 6.5 ;
             etudiant[6].Numerounique = 7;
             //----------------------------------------------
             strcpy(etudiant[7].Nom , "aamir");
             strcpy(etudiant[7].Prenom , "mohamed");
             strcpy(etudiant[7].DateNaissance ,"2005/05/25");
-            strcpy(etudiant[7].Departement  , "D" );
+            strcpy(etudiant[7].Departement  , "GEOGRAPHIE" );
             etudiant[7].generale  = 19.5 ;
             etudiant[7].Numerounique = 8;
 }
@@ -164,6 +164,7 @@ Vetudiants Vetudiant[100];
     while(1)
     {
         aficeh();
+        printf("veuillez entrer choix : ");
         choi = numirInt();
   
     switch (choi)
@@ -211,12 +212,15 @@ void    aficeh()
     printf("4 => Statistique\n");
     printf("5 => Calculer\n");
     printf("6 => Rechercher\n");
+    printf("7 => Tri\n");
+    printf("0 => Quitter\n");
     printf("/***************************************************************/\n\n");
 }
 
 
 void    ajouter(etudiants etudiant[100] )
 {
+    int choi;
         etudiant[count].Numerounique = count + 1; 
         printf ("Nom : ");
         scanf ("%s", &etudiant[count].Nom);
@@ -224,9 +228,31 @@ void    ajouter(etudiants etudiant[100] )
         scanf ("%s", &etudiant[count].Prenom);
         printf ("Date Naissance : ");
         scanf ("%s", &etudiant[count].DateNaissance);
-        printf("\nA =  \nB =  \n C =  \n D = \n");
-        printf ("Departement : ");
-        scanf ("%s", &etudiant[count].Departement);
+        printf("\n1 = maths \n2 = physique \n 3 = chimique \n 4 = GEOGRAPHIE \n");
+        while (1)
+        {
+            choi =numirInt();
+        
+        if (choi == 1)
+        {
+            strcpy(etudiant[count].Departement,"maths");
+            break;
+        }else if (choi == 2)
+        {
+            strcpy(etudiant[count].Departement,"physique");
+            break;
+        }else if (choi == 3)
+        {
+            strcpy(etudiant[count].Departement,"chimique");
+
+            break;
+        }else if (choi == 4)
+        {
+            strcpy(etudiant[count].Departement,"GEOGRAPHIE");
+            
+            break;
+        }
+        }
         printf ("Note generale : ");
         scanf ("%f", &etudiant[count].generale); 
         count+=1;
@@ -257,7 +283,9 @@ void    afficher(etudiants etudiant[100])
 void    SupprimerUpdate(etudiants etudiant[100])
 {
     int chio;
-    printf("1 => modifer\n2 => Supprimer");
+    printf("1 => modifer\t2 => Supprimer \n");
+     printf("veuillez entrer choix : ");
+
     chio = numirInt();
     if (chio == 1)
     {
@@ -290,15 +318,38 @@ void    update(etudiants etudiant[100])
     }
     if ( n == 1)
     {
+        int choi;
         printf ("Nom : ");
         scanf ("%s", &etudiant[r].Nom);
         printf ("Prenom : ");
         scanf ("%s", &etudiant[r].Prenom);
         printf ("Date Naissance : ");
         scanf ("%s", &etudiant[r].DateNaissance);
-        printf("\nA =  \nB =  \n C =  \n D = \n");
-        printf ("Departement : ");
-        scanf ("%s", &etudiant[r].Departement);
+        printf("\n1 = maths \n2 = physique \n 3 = chimique \n 4 = GEOGRAPHIE \n");
+        while (1)
+        {
+            choi =numirInt();
+        
+        if (choi == 1)
+        {
+            strcpy(etudiant[count].Departement,"maths");
+            break;
+        }else if (choi == 2)
+        {
+            strcpy(etudiant[count].Departement,"physique");
+            break;
+        }else if (choi == 3)
+        {
+            strcpy(etudiant[count].Departement,"chimique");
+
+            break;
+        }else if (choi == 4)
+        {
+            strcpy(etudiant[count].Departement,"GEOGRAPHIE");
+            
+            break;
+        }
+        }
         printf ("Note generale : ");
         scanf ("%f", &etudiant[r].generale); 
     }
@@ -344,24 +395,32 @@ void    Supprimer (etudiants etudiant[100])
 void    Calculer(etudiants etudiant[100])
 {
     int GlInk;
-    int sum = 0;
-    printf("jdkd");
-    scanf("%d",&GlInk);
+    float sum = 0;
+    int modl=0;
+    printf ("1 => la moyenne generale Departement \n2 => la note generale moyenne :\n");
+        printf("veuillez entrer choix : ");
+
+    GlInk = numirInt();
     if (GlInk == 1)
     {
-        char choi[100];
-        printf("\nA =  \nB =  \n C =  \n D = \n");
-        scanf("%s",choi);
+        char numeri[4][20] = {"maths","physique","chimique","GEOGRAPHIE"};
+        int choi;
+       
+        printf("\n1 = maths \n2 = physique \n3 = chimique \n4 = GEOGRAPHIE \n");
+        choi =numirInt();
+        
+        printf("%s : ",numeri[choi]);
     for (int i = 0; i < count; i++)
     {
-        if (strcmp(etudiant[i].Departement , choi) == 0)
+        if (strcmp(etudiant[i].Departement , numeri[choi]) == 0)
         {
 
            sum += etudiant[i].generale;
+           modl++;
         }
         
     }
-    printf("%d",sum);
+    printf("%.2f",sum / modl);
     }
     else if (GlInk == 2)
     {
@@ -369,7 +428,7 @@ void    Calculer(etudiants etudiant[100])
     {
            sum += etudiant[i].generale;   
     }
-    printf("%d",sum);
+    printf("%.2f",sum / count);
 
     }
 }
@@ -377,6 +436,8 @@ void    Calculer(etudiants etudiant[100])
 
 void    Statistique(etudiants etudiant[100])
 {
+    printf("\n1 => le nombre total d'etudiants \n2 => le nombre d'etudiants dans chaque departement. \
+    \n3 =>  les etudiants ayant une moyenne generale superieure a un certain seuil. \n 4 =>  les 3 etudiants ayant les meilleures notes \n5 =>  le nombre d'etudiants ayant reussi dans chaque departement (ceux ayant une note superieure ou egale a 10/20). \n");
     int choi;
     choi = numirInt();
     if (choi == 1)
@@ -386,7 +447,7 @@ void    Statistique(etudiants etudiant[100])
     }
     else if (choi == 2)
     {
-            NombreChaqueDepartement(etudiant);
+        NombreChaqueDepartement(etudiant);
     }else if (choi == 3)
     {
         NombreChaquemoyenne(etudiant);
@@ -395,7 +456,7 @@ void    Statistique(etudiants etudiant[100])
     {
         Meilleures3Notes(etudiant);
     }
-    else if (choi == 6)
+    else if (choi == 5)
     {
         ChaquedePartement10(etudiant);
     }   
@@ -406,24 +467,24 @@ void    NombreChaqueDepartement(etudiants etudiant[100])
     int A = 0 ,B = 0, C = 0, D = 0;
     for (int i = 0; i < count; i++)
     {
-        if (etudiant[i].Departement[0] == 'A')
+        if (strcmp(etudiant[count].Departement,"maths") == 0)
         {
             A+=1;
         }
-        if (etudiant[i].Departement[0] == 'B')
+        if (strcmp(etudiant[count].Departement,"physique") == 0)
         {
             B+=1;
         }
-        if (etudiant[i].Departement[0] == 'C')
+        if (strcmp(etudiant[count].Departement,"chimique") == 0)
         {
             C+=1;
         }
-        if (etudiant[i].Departement[0] == 'D')
+        if ( strcmp(etudiant[count].Departement,"GEOGRAPHIE") == 0)
         {
             D+=1;
         }
     }
-    printf("A %d B %d C %d D %d",A, B, C, D);
+    printf("maths = %d \nphysique = %d \n chimique = %d \n GEOGRAPHIE = %d \n",A, B, C, D);
     
 }
 
@@ -447,70 +508,58 @@ void    NombreChaquemoyenne(etudiants etudiant[100])
 
 void    Meilleures3Notes(etudiants etudiant[100])
 {
-    float max1 = 0;
-    float max2 = 0;
-    float max3 = 0;
-    for (int i = 0; i < count; i++)
+        Trimoyenne(etudiant);
+    for (int i = 0; i < 3; i++)
     {
-        if (max1 < etudiant[i].generale)
-        {
-            max3 = max2;
-            max2 = max1;
-            max1 = etudiant[i].generale;
-        }
-        else if (max1 > max2 && max2 < etudiant[i].generale )
-        {
-            max3 = max2;
-            max2 = etudiant[i].generale;
-        }
-        else if (max2 > max3 && max3 < etudiant[i].generale )
-        {
-            max3 = etudiant[i].generale;
-            
-        }
+            printf("%.2f\t",etudiant[i].generale);
+        
+    }
+    
         
         
-    }   
 }
 
+//ERROR
 void    ChaquedePartement10(etudiants etudiant[100])
 {
     int A = 0 ,B = 0, C = 0, D = 0;
-    printf ("A = \n");
+        printf("\nA = maths B = physique  C = chimique  D = GEOGRAPHIE \n");
+
+    printf ("maths = ");
 
     for (int i = 0; i < count; i++)
     {
-        if (etudiant[i].Departement[0] == 'A' && etudiant[i].generale > 10.00)
+        if (strcmp(etudiant[count].Departement,"maths") == 0 && etudiant[i].generale > 10.00)
         {
-            printf ("%d \n",etudiant[i].generale);
+            printf ("%.2f ",etudiant[i].generale);
         }
     }
-    printf ("B = \n");
+    printf ("\nphysique = ");
 
     for (int i = 0; i < count; i++)
     {
-        if (etudiant[i].Departement[0] == 'B' && etudiant[i].generale >= 10.00)
+        if (strcmp(etudiant[count].Departement,"physique") == 0 && etudiant[i].generale >= 10.00)
         {
-            printf ("%d \n",etudiant[i].generale);
+            printf ("%.2f \n",etudiant[i].generale);
             
         }
 
     }
-    printf ("C = \n");
+    printf ("chimique = ");
     for (int i = 0; i < count; i++)
     {
-        if (etudiant[i].Departement[0] == 'C'&& etudiant[i].generale > 10.00)
+        if (strcmp(etudiant[count].Departement,"chimique") == 0 && etudiant[i].generale > 10.00)
         {
-            printf ("%d \n",etudiant[i].generale);
+            printf ("%.2f ",etudiant[i].generale);
         }
     }
-    printf ("D = \n");
+    printf ("GEOGRAPHIE = ");
 
     for (int i = 0; i < count; i++)
     {
-        if (etudiant[i].Departement[0] == 'D'&& etudiant[i].generale > 10.00)
+        if (strcmp(etudiant[count].Departement,"GEOGRAPHIE") == 0 && etudiant[i].generale > 10.00)
         {
-            printf ("%d \n",etudiant[i].generale);
+            printf ("%.2f \n",etudiant[i].generale);
         }
     }
 }
@@ -521,19 +570,20 @@ void Rechercher (etudiants etudiant[100])
     int choi;
     int n = 0;
     int i;
-
+    printf("1 => Rechercher un etudiant par son nom \n 2 => Afficher la liste des etudiants inscrits dans un departement specifique");
+    choi = numirInt();
 
     if (choi == 1)
     {
     char Nome[100];
-    printf("Enter the titre: ");
+    printf("Enter the NOM: ");
     scanf("%s", Nome);
     for (int i = 0; i < count; i++)
     {
         if (strcmp(etudiant[i].Nom,Nome) == 0)
         {
         printf("\n------------------------------\n");
-        printf ("id %d \n", etudiant[i].Numerounique);
+        printf ("id :%d \n", etudiant[i].Numerounique);
         printf ("Nom : ");
         printf ("%s \n", etudiant[i].Nom);
         printf ("Prenom : ");
@@ -551,15 +601,15 @@ void Rechercher (etudiants etudiant[100])
     }
     if (n == 0)
     {
-
-    }else
-    {
         printf("dlklfd,fld,fl");
+
     }
-    }else if (choi == 2)
+    
+    }
+    if (choi == 2)
     {
-        char Nome[100];
-    printf("Enter the titre: ");
+    char Nome[100];
+    printf("Enter the NOM Departement : ");
     scanf("%s", Nome);
     for (int i = 0; i < count; i++)
     {
@@ -582,7 +632,7 @@ void Rechercher (etudiants etudiant[100])
     }
     if (n == 0)
     {
-        printf("dlklfd,fld,fl");
+        printf("NE PAS AJETE NAME");
 
     }
     }
@@ -591,6 +641,7 @@ void Rechercher (etudiants etudiant[100])
 void    Trier(etudiants etudiant[100], Vetudiants Vetudiant[100])
 {
     int choi;
+    printf("1 => Tri alphabetique  nom (de A a Z) \n2 Tri moyenne generale, du plus eleve au plus faible ou inversement. \n3 => Tri reussite (ceux ayant une moyenne superieure ou egale a 10/20).");
     choi = numirInt();
 
     if (choi == 1)
@@ -636,16 +687,20 @@ void Trimoyenne(etudiants etudiant[100])
         {
         if (etudiant[j].generale < etudiant[j + 1].generale)
         {
-            Int_swap(&etudiant[j].Numerounique ,&etudiant[j+1].Numerounique);
+           
             char_swap(etudiant[j].Nom , etudiant[j+1].Nom );
             char_swap(etudiant[j].Prenom , etudiant[j+1].Prenom);
             char_swap(etudiant[j].DateNaissance ,  etudiant[j+1].DateNaissance);
             char_swap(etudiant[j].Departement , etudiant[j+1].Departement);
-            Float_swap(&etudiant[j].generale , &etudiant[j+1].generale);
+            Float_swap(&etudiant[j].generale , &etudiant[j + 1].generale);
+
+            Int_swap(&etudiant[j].Numerounique , &etudiant[j + 1].Numerounique);
+
         }
         }
     }
 }
+
 
 void    TriReussite (etudiants etudiant[100] ,Vetudiants Vetudiant[100])
 {
@@ -665,8 +720,7 @@ void    TriReussite (etudiants etudiant[100] ,Vetudiants Vetudiant[100])
     }
     for (int i = 0; i < vcount; i++)
     {
-        printf ("%.2f \n",Vetudiant[i].generale); 
-        
+        printf ("%.2f \n",Vetudiant[i].generale);     
     }
     
     
