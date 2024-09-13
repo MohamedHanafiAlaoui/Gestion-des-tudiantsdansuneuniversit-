@@ -5,6 +5,7 @@
 
 int count = 8;
 int vcount = 0;
+int ID = 8;
 
 typedef  struct 
 {
@@ -220,7 +221,7 @@ void    aficeh()
 void    ajouter(etudiants etudiant[100] )
 {
     int choi;
-        etudiant[count].Numerounique = count + 1; 
+        etudiant[count].Numerounique = ID + 1; 
         printf ("Nom : ");
         scanf ("%s", &etudiant[count].Nom);
         printf ("Prenom : ");
@@ -258,6 +259,7 @@ void    ajouter(etudiants etudiant[100] )
         printf ("Note generale : ");
         scanf ("%f", &etudiant[count].generale); 
         count+=1;
+        ID++;
 }
 
 void    afficher(etudiants etudiant[100])
@@ -391,7 +393,7 @@ void    Supprimer (etudiants etudiant[100])
             strcpy(etudiant[i].DateNaissance ,  etudiant[i+1].DateNaissance);
             strcpy(etudiant[i].Departement , etudiant[i+1].Departement);
             Float_swap(&etudiant[i].generale , &etudiant[i+1].generale);
-            etudiant[i].Numerounique = i + 1;
+            Int_swap(&etudiant[i].Numerounique ,&etudiant[i+1].Numerounique );
         }
         count-=1;  
 }
